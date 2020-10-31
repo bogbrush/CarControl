@@ -1,0 +1,49 @@
+﻿<style>
+	.mynav {
+		display: flex;
+	}
+
+	.mynav.space-around {
+		justify-content: space-around;
+	}
+
+	.mynav.space-between {
+		justify-content: space-between;
+	}
+
+</style>
+<div>
+	<nav class="navbar navbar-inverse" style="border: none;border-top: solid; position: fixed;bottom: 0;  width: 100%;margin-bottom: 0px;z-index:100; background-image: linear-gradient(rgb(0, 60, 0), rgb(0, 10, 0));">
+		<div class="container" style="background-image: linear-gradient(rgb(0, 60, 0), rgb(0, 10, 0));">
+			<div class="navbar-header" style="height:50px; width: -webkit-fill-available;">
+				<div id="navigation" class="mynav space-around" style="padding-top: 0.5rem;">
+		
+					<a href="index.html" id="ControlLink" data-page="control">
+						<div style="margin-left: 1px;"> 
+							<img style="height: 2.8rem" src="./images/control.svg" alt="" />
+						</div>
+						<div style="font-size:10px">Home</div>
+					</a>
+					<a href="journeys.html" id="TrackingLink" data-page="journeys">
+						<div style="margin-left: 10px;">
+							<img style="height: 2.8rem" src="./images/location.svg" alt="" />
+						</div>
+						<div style="font-size:10px">Journeys</div>
+					</a>
+					<a href="logs.html" id="LogsLink" data-page="logs">
+						<div style="margin-left: 0px;">
+							<img style="height: 2.8rem" src="./images/logs.svg" alt="" />
+						</div>
+						<div style="font-size:10px">Logs</div>
+					</a>
+					<a href="debug.html" id="DebugLink" data-page="debug">
+						<div style="margin-left: 1px;">
+							<img style="height: 2.8rem" src="./images/debug.svg" alt="" />
+						</div>
+						<div style="font-size:10px">Debug</div>
+					</a>
+			</div>
+			</div>
+		</div>
+	</nav>
+</div>

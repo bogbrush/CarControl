@@ -1,0 +1,502 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>CarControl</title>
+
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.3.0/json2html.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
+
+	<link rel="stylesheet" href="https://bootswatch.com/3/slate/bootstrap.min.css">
+
+	<style>
+		hr {
+			background-image: linear-gradient(to right,rgba(150,200,150,0.2),rgba(150, 200, 150, 0.5),rgba(150, 200, 150, 0.5),rgba(150, 200, 150, 0.5), rgba(50,200,150,0.2));
+			height: 0.2rem;
+			margin-top: 1rem;
+			margin-bottom: 1rem;
+			border: 0;
+		}
+
+		.content {
+			padding-top: 5rem;
+			padding-bottom: 5rem;
+			background-image: radial-gradient(rgb(0, 100, 0), rgb(0, 0, 0));
+			flex-grow: 1;
+		}
+
+		.btn-lg {
+			width: 25rem;
+		}
+	</style>
+
+	<style>
+
+		.ImageCar {
+			width: 20rem;
+		}
+
+
+
+		@media (min-width: 300px) {
+			.ImageCar {
+				width: 25rem;
+			}
+		}
+
+		@media (min-width: 400px) {
+			.ImageCar {
+				width: 30rem;
+			}
+		}
+
+
+		@media (min-width: 768px) {
+			.ImageCar {
+				width: 40rem;
+			}
+		}
+
+		@media (min-width: 992px) {
+			.ImageCar {
+				width: 50rem;
+			}
+		}
+
+		@media (min-width: 1200px) {
+			.ImageCar {
+				width: 60rem;
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+	<div style="display: flex;flex-flow: column; height:-webkit-fill-available;">
+		<div id="header"></div>
+		<div id="footer"></div>
+
+		<div id="Content" class="content">
+			<div id="Control" class="container">
+				<br>
+				<img class="ImageCar" style="margin-left: auto;margin-right: auto;display: block;" src="./images/300c_side.svg" alt="" />
+				<hr>
+
+
+
+
+				<label id="success" style="font-size: large; color:green; display:none;">Request Sent</label>
+				<label id="failed" style="font-size: large; color:red; display:none;">Failed</label>
+				<label style="font-size: large; color:green;">&nbsp;</label>
+
+
+
+
+				<div style="display:none">
+					<hr>
+					<label class="" data-toggle="collapse" href="#collapseWebCam" role="button" aria-expanded="false" aria-controls="collapseWebCam">
+						<h3>View Webcam</h3>
+					</label>
+					<div class="collapse" id="collapseWebCam">
+						<img id="webcam" style="width: 100%;height: auto;" src="webcam/grabs/camera.jpg" />
+						<a style="cursor: pointer;" href="webcam/"><img style="height: 1.5rem" src="./images/webcamhistory.svg" alt="" />View more video</a>
+					</div>
+				</div>
+
+
+
+				<div id="Commands">
+
+
+	
+
+					<!--
+									<button data-type="Command" type="button" class="btn-lg btn btn-default"
+											data-command="Custom| 0;14;1| 10;27;1| 10;26;1 |10;25;1| 10;14;0| 10;27;0| 10;26;0| 10;25;0| 10;14;1| 10;27;1| 10;26;1 |10;25;1| 10;14;0| 10;27;0| 10;26;0| 10;25;0| 0;14;1| 10;27;1| 10;26;1 |10;25;1| 10;14;0| 10;27;0| 10;26;0| 10;25;0| 10;14;1| 10;27;1| 10;26;1 |10;25;1| 10;14;0| 10;27;0| 10;26;0| 10;25;0">
+										Test 1
+									</button>
+
+									<button data-type="Command" type="button" class="btn-lg btn btn-default"
+											data-command="Custom| 0;14;1| 100;27;1| 100;26;1 |100;25;1| 100;14;0| 100;27;0| 100;26;0| 100;25;0| 10;14;1| 100;27;1| 100;26;1 |100;25;1| 100;14;0| 100;27;0| 100;26;0| 100;25;0| 0;14;1| 100;27;1| 100;26;1 |100;25;1| 100;14;0| 100;27;0| 100;26;0| 100;25;0| 100;14;1| 100;27;1| 100;26;1 |100;25;1| 100;14;0| 100;27;0| 100;26;0| 100;25;0">
+										Test 2
+									</button>
+
+									<button data-type="Command" type="button" class="btn-lg btn btn-default"
+											data-command="Custom| 0;33;1| 100;32;1| 100;22;1 |100;23;1| 100;33;0| 100;32;0| 100;22;0| 100;23;0| 10;33;1| 100;32;1| 100;22;1 |100;23;1| 100;33;0| 100;32;0| 100;22;0| 100;23;0| 0;33;1| 100;32;1| 100;22;1 |100;23;1| 100;33;0| 100;32;0| 100;22;0| 100;23;0| 100;33;1| 100;32;1| 100;22;1 |100;23;1| 100;33;0| 100;32;0| 100;22;0| 100;23;0">
+										Test 3
+									</button>
+
+
+
+					<button data-type="Command" type="button" class="btn-lg btn btn-default"
+							data-command="Read|34|35|36|39">
+						Read|34|35|36|39
+					</button>-->
+
+
+
+					<div>
+						<hr>
+						<div class="card card-body col-md-12 text-center">
+							<label class="" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExamplpe1">
+								<h3>Side Lights <img style="height: 3rem" src="./images/sidelights.svg" alt="" /></h3>
+							</label>
+						</div>
+						<div class="collapseZ" id="collapseExample1">
+							<div class="card card-body col-md-12 text-center">
+
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;14;1">
+									On
+								</button>
+
+								<BR />
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;14;0">
+									Off
+								</button>
+								<BR />
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;14;1|500;14;0">
+									Flash Once
+								</button>
+								<BR />
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;14;1|300;14;0|500;14;1|300;14;0|">
+									Flash Twice
+								</button>
+								<BR />
+
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Morse|14|SOS">
+									SOS
+								</button>
+								<BR />
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;14;1|5;14;0|100;14;1|5;14;0|100;14;1|5;14;0|100;14;1|5;14;0|100;14;1|5;14;0|100;14;1|5;14;0|100;14;1|5;14;0|100;14;1|5;14;0|100;14;1|5;14;0|100;14;1|5;14;0|100;14;1|5;14;0|100;14;1|5;14;0|100;14;1|5;14;0|">
+									Strobe
+								</button>
+								<BR />
+								<input type="text" name="" id="morsetext1">
+								<button data-type="MorseCommand" type="button" class="btn-lg btn btn-default"
+										data-pin="14" data-textid="morsetext1">
+									Send Morse
+								</button>
+								<BR />
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom
+										|0;14;1|5;14;0
+										|180;14;1|5;14;0
+										|160;14;1|5;14;0
+										|140;14;1|5;14;0
+										|120;14;1|5;14;0
+										|100;14;1|5;14;0
+										|80;14;1|5;14;0
+										|60;14;1|5;14;0
+										|40;14;1|5;14;0
+										|20;14;1|5;14;0
+										|20;14;1|5;14;0
+										|40;14;1|5;14;0
+										|60;14;1|5;14;0
+										|80;14;1|5;14;0
+										|100;14;1|5;14;0
+										|120;14;1|5;14;0
+										|140;14;1|5;14;0
+										|160;14;1|5;14;0
+										|180;14;1|5;14;0">
+									UpDown Strobe
+								</button>
+
+							</div>
+						</div>
+					</div>
+
+
+
+					<div>
+						<hr>
+						<div class="card card-body col-md-12 text-center">
+							<label class="" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
+								<h3>Horn <img style="height: 3rem" src="./images/carhorn.svg" alt="" /></h3>
+							</label>
+						</div>
+						<div class="collapseZ text-center" id="collapseExample2">
+							<div class="card card-body">
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;25;1|10;25;0">
+									Beep Once 10
+								</button>
+								<BR />
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;25;1|20;25;0">
+									Beep Once 20
+								</button>
+								<BR />
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;25;1|50;25;0">
+									Beep Once 50
+								</button>
+								<BR />
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;25;1|100;25;0">
+									Beep Once 100
+								</button>
+								<BR />
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;25;1|200;25;0">
+									Beep Once 200
+								</button>
+								<BR />
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;25;1|500;25;0">
+									Beep Once 500
+								</button>
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;25;1|1500;25;0|500;25;1|500;25;0|300;25;1|1000;25;0|1000;25;1|200;25;0|1200;25;1|700;25;0|500;25;1|100;25;0|500;25;1|500;25;0">
+									Panic
+								</button>
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom
+										|0;25;1|30;25;0
+										|700;25;1|30;25;0
+										|600;25;1|30;25;0
+										|500;25;1|30;25;0
+										|400;25;1|30;25;0
+										|300;25;1|30;25;0
+										|200;25;1|30;25;0
+										|100;25;1|30;25;0">
+									Faster Horn
+								</button>
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;25;1|20;25;0|40;25;1|20;25;0|40;25;1|20;25;0|40;25;1|20;25;0|40;25;1|20;25;0|40;25;1|20;25;0|40;25;1|20;25;0">
+									Strobe Horn
+								</button>
+							</div>
+						</div>
+					</div>
+
+
+
+
+					<div>
+						<hr>
+						<div class="card card-body col-md-12 text-center">
+							<label class=" text-center" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample4">
+								<h3>Headlights <img style="height: 3rem" src="./images/headlights.svg" alt="" /></h3>
+							</label>
+						</div>
+						<div class="collapseZ text-center" id="collapseExample4">
+							<div class="card card-body">
+
+								<h5>Both</h5>
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;27;1|0;26;1|">
+									On
+								</button>
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;27;0|0;26;0|">
+									Off
+								</button>
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;27;1|0;26;1|500;27;0|0;26;0|">
+									Flash
+								</button>
+
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;27;1|0;26;1|300;27;0|0;26;0|500;27;1|0;26;1|300;27;0|0;26;0|">
+									Flash twice
+								</button>
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;27;1|0;26;1|5;27;0|0;26;0|100;27;1|0;26;1|5;27;0|0;26;0|100;27;1|0;26;1|5;27;0|0;26;0|100;27;1|0;26;1|5;27;0|0;26;0|100;27;1|0;26;1|5;27;0|0;26;0|100;27;1|0;26;1|5;27;0|0;26;0|100;27;1|0;26;1|5;27;0|0;26;0|100;27;1|0;26;1|5;27;0|0;26;0|100;27;1|0;26;1|5;27;0|0;26;0|100;27;1|0;26;1|5;27;0|0;26;0|100;27;1|0;26;1|5;27;0|0;26;0|">
+									Strobe
+								</button>
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom
+										|0;27;1|0;26;1|5;26;0|0;27;0
+										|180;27;1|0;26;1|5;26;0|0;27;0
+										|160;27;1|0;26;1|5;26;0|0;27;0
+										|140;27;1|0;26;1|5;26;0|0;27;0
+										|120;27;1|0;26;1|5;26;0|0;27;0
+										|100;27;1|0;26;1|5;26;0|0;27;0
+										|80;27;1|0;26;1|5;26;0|0;27;0
+										|60;27;1|0;26;1|5;26;0|0;27;0
+										|40;27;1|0;26;1|5;26;0|0;27;0
+										|20;27;1|0;26;1|5;26;0|0;27;0
+										|20;27;1|0;26;1|5;26;0|0;27;0
+										|40;27;1|0;26;1|5;26;0|0;27;0
+										|60;27;1|0;26;1|5;26;0|0;27;0
+										|80;27;1|0;26;1|5;26;0|0;27;0
+										|100;27;1|0;26;1|5;26;0|0;27;0
+										|120;27;1|0;26;1|5;26;0|0;27;0
+										|140;27;1|0;26;1|5;26;0|0;27;0
+										|160;27;1|0;26;1|5;26;0|0;27;0
+										|180;27;1|0;26;1|5;26;0|0;27;0
+										">
+									UpDown Strobe
+								</button>
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;27;1|5;27;0|300;26;1|5;26;0|300;27;1|5;27;0|300;26;1|5;26;0|300;27;1|5;27;0|300;26;1|5;26;0|300;27;1|5;27;0|300;26;1|5;26;0|300;27;1|5;27;0|300;26;1|5;26;0|300;27;1|5;27;0|300;26;1|5;26;0|300;27;1|5;27;0|300;26;1|5;26;0|300;27;1|5;27;0|300;26;1|5;26;0|300;27;1|5;27;0|300;26;1|5;26;0|300;27;1|5;27;0|300;26;1|5;26;0|300;27;1|5;27;0|300;26;1|5;26;0|300;27;1|5;27;0|300;26;1|5;26;0|">
+									Alternate Strobe
+								</button>
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom
+										|0;27;1|5;27;0|100;27;1|5;27;0|300;26;1|5;26;0|100;26;1|5;26;0|
+										300;27;1|5;27;0|100;27;1|5;27;0|300;26;1|5;26;0|100;26;1|5;26;0|
+										300;27;1|5;27;0|100;27;1|5;27;0|300;26;1|5;26;0|100;26;1|5;26;0|
+										300;27;1|5;27;0|100;27;1|5;27;0|300;26;1|5;26;0|100;26;1|5;26;0|
+										300;27;1|5;27;0|100;27;1|5;27;0|300;26;1|5;26;0|100;26;1|5;26;0|
+										300;27;1|5;27;0|100;27;1|5;27;0|300;26;1|5;26;0|100;26;1|5;26;0">
+									Alternate Strobe X2
+								</button>
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;27;1|300;27;0|0;26;1|300;26;0|0;27;1|300;27;0|0;26;1|300;26;0|0;27;1|300;27;0|0;26;1|300;26;0|">
+									Alternate flash
+								</button>
+
+
+								<hr>
+								<h5>Driver's Side</h5>
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;27;1">
+									Driver On
+								</button>
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;27;0">
+									Driver Off
+								</button>
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Morse|27|SOS">
+									Driver SOS
+								</button>
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;27;1|500;27;0">
+									Driver Flash
+								</button>
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;27;1|50;27;0">
+									Driver Flash Short
+								</button>
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;27;1|5;27;0|100;27;1|5;27;0|100;27;1|5;27;0|100;27;1|5;27;0|100;27;1|5;27;0|100;27;1|5;27;0|100;27;1|5;27;0|100;27;1|5;27;0|100;27;1|5;27;0|100;27;1|5;27;0|100;27;1|5;27;0|100;27;1|5;27;0|100;27;1|5;27;0|">
+									Driver Strobe
+								</button>
+
+								<hr>
+								<h5>Passenger's Side</h5>
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;26;1">
+									Passenger On
+								</button>
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;26;0">
+									Passenger Off
+								</button>
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Morse|26|SOS">
+									Passenger SOS
+								</button>
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;26;1|500;26;0">
+									Passenger Flash
+								</button>
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;26;1|50;26;0">
+									Passenger Flash Short
+								</button>
+
+								<button data-type="Command" type="button" class="btn-lg btn btn-default"
+										data-command="Custom|0;26;1|5;26;0|100;26;1|5;26;0|100;26;1|5;26;0|100;26;1|5;26;0|100;26;1|5;26;0|100;26;1|5;26;0|100;26;1|5;26;0|100;26;1|5;26;0|100;26;1|5;26;0|100;26;1|5;26;0|100;26;1|5;26;0|100;26;1|5;26;0|100;26;1|5;26;0|">
+									Passenger Strobe
+								</button>
+
+								<hr>
+								<div>
+									<input type="text" name="" id="morsetext2">
+									<button data-type="MorseCommand" type="button" class="btn-lg btn btn-default"
+											data-pin="27" data-textid="morsetext2">
+										Driver Send Morse
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
+	
+
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<script>
+
+			$('*[data-type="Command"]').click(function ()
+			{
+				$.get("/api/Commands/add?command=" + $(this).data("command"), function ()
+				{
+					$("#success").fadeIn(5);
+					$("#success").fadeOut(1000);
+
+				})
+					.fail(function ()
+					{
+						$("#failed").fadeIn(10);
+						$("#failed").fadeOut(2000);
+					});
+			});
+
+			$('*[data-type="MorseCommand"]').click(function ()
+			{
+				$.get("/api/Commands/add?command=Morse|" + $(this).data("pin") + "|" + $('#' + $(this).data("textid")).val(), function ()
+				{
+					$("#success").fadeIn(5);
+					$("#success").fadeOut(1000);
+
+				})
+					.fail(function ()
+					{
+						$("#failed").fadeIn(10);
+						$("#failed").fadeOut(2000);
+					});
+			});
+
+		</script>
+
+
+
+</body>
+
+</html>
